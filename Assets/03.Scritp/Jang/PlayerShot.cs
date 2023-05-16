@@ -12,10 +12,13 @@ public class PlayerShot : MonoBehaviour
     enum State { Normal, Ult }
     State state = State.Normal;
 
+    [Header("Shot")]
     [SerializeField] private Transform point;
     [SerializeField] private GameObject bullets;
 
+    [Header("FanRander")]
     [SerializeField] private GameObject range;
+    [SerializeField] private ParticleSystem particle;
     [SerializeField] private float ultRadius;
     [SerializeField] private float angle;
 
@@ -23,7 +26,7 @@ public class PlayerShot : MonoBehaviour
 
     private void Awake()
     {
-        gaugeBar = FindObjectOfType<Slider>();
+        gaugeBar = GameObject.Find("Gauge").GetComponent<Slider>();
     }
 
     void Update()
@@ -82,6 +85,9 @@ public class PlayerShot : MonoBehaviour
                     Debug.Log($"enemy : {enmy}");
                 }
             }
+
+            particle.transform.rotation = range.transform.rotation;
+            particle.Play();
 
             range.SetActive(false);
             state = State.Normal;
