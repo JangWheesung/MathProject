@@ -28,10 +28,16 @@ public class PlayerShot : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin vCam;
 
     private Slider gaugeBar;
+    private Color backGround;
+    private Color fill;
 
     private void Awake()
     {
         gaugeBar = GameObject.Find("Gauge").GetComponent<Slider>();
+
+        backGround = gaugeBar.transform.GetChild(0).GetComponent<Image>().color;
+        fill = gaugeBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color;
+
         vCam = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
@@ -42,6 +48,8 @@ public class PlayerShot : MonoBehaviour
 
     void Brain()
     {
+        GaugeFull();
+
         if (Input.GetKeyDown(KeyCode.Alpha1) && gaugeBar.value >= gaugeBar.maxValue)
         {
             gaugeBar.value = 0;
@@ -54,6 +62,21 @@ public class PlayerShot : MonoBehaviour
             Ultimate();
     }
 
+    void GaugeFull()
+    {
+        if (gaugeBar.value >= gaugeBar.maxValue)
+        {
+            float expression = (Mathf.Cos(Time.time * 2 * Mathf.PI) + 1) * 0.5f;
+
+            gaugeBar.transform.GetChild(0).GetComponent<Image>().color = new Color(backGround.r, backGround.g, backGround.b, expression);
+            gaugeBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(fill.r, fill.g, fill.b, expression);
+        }
+        else
+        {
+            gaugeBar.transform.GetChild(0).GetComponent<Image>().color = new Color(backGround.r, backGround.g, backGround.b, 255);
+            gaugeBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(fill.r, fill.g, fill.b, 255);
+        }
+    }
 
     void BulletShot()
     {
@@ -75,30 +98,35 @@ public class PlayerShot : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ultRadius, LayerMask.GetMask("Enemy"));
-
-            foreach (Collider2D enmy in cols)
-            {
-                Vector3 vec = enmy.gameObject.transform.position - transform.position;
-
-                float degress = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(vec.normalized, range.transform.up));
-                Debug.Log(degress);
-
-                if (degress <= angle / 2)
-                {
-                    //범위 내 들어옴
-                    Debug.Log($"enemy : {enmy}");
-                }
-            }
-
-            particle.transform.rotation = range.transform.rotation;
-            particle.Play();
-
-            StartCoroutine(ShakeCamera(0.3f));
-
-            range.SetActive(false);
-            state = State.Normal;
+            UltimateShot();
         }
+    }
+
+    void UltimateShot()
+    {
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ultRadius, LayerMask.GetMask("Enemy"));
+
+        foreach (Collider2D enmy in cols)
+        {
+            Vector3 vec = enmy.gameObject.transform.position - transform.position;
+
+            float degress = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(vec.normalized, range.transform.up));
+            Debug.Log(degress);
+
+            if (degress <= angle / 2)
+            {
+                //범위 내 들어옴
+                Debug.Log($"enemy : {enmy}");
+            }
+        }
+
+        particle.transform.rotation = range.transform.rotation;
+        particle.Play();
+
+        StartCoroutine(ShakeCamera(0.3f));
+
+        range.SetActive(false);
+        state = State.Normal;
     }
 
     IEnumerator ShakeCamera(float time)
