@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IsGround : MonoBehaviour
 {
-    bool isGround;
+    public bool isGround;
 
     public bool Ground()
     {

@@ -8,7 +8,9 @@ public class EnemyMovement : MonoBehaviour
     State state = State.Idle;
 
     [SerializeField] private float radius;
+    [SerializeField] private float speed;
 
+    Rigidbody2D rb;
     GameObject player;
 
     float shake = -180;
@@ -16,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
     }
 
@@ -27,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
 
     void FSM()
     {
+        Debug.Log(PlayerRader());
         if (PlayerRader()) 
             state = State.Tracking;
 
@@ -43,6 +47,8 @@ public class EnemyMovement : MonoBehaviour
     void TrackingEnemy()
     {
         Vector2 vec = player.transform.position - transform.position;
+
+        rb.velocity = vec * speed;
     }
 
     bool PlayerRader()
