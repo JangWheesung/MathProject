@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,11 +23,16 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private float ultRadius;
     [SerializeField] private float angle;
 
+    [Header("Other")]
+    [SerializeField] private CinemachineVirtualCamera cam;
+    private CinemachineBasicMultiChannelPerlin vCam;
+
     private Slider gaugeBar;
 
     private void Awake()
     {
         gaugeBar = GameObject.Find("Gauge").GetComponent<Slider>();
+        vCam = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     void Update()
@@ -60,7 +66,6 @@ public class PlayerShot : MonoBehaviour
 
     void Ultimate()
     {
-        Vector3 pos;
         range.SetActive(true);
 
         if(Input.GetKey(KeyCode.K))
@@ -89,9 +94,18 @@ public class PlayerShot : MonoBehaviour
             particle.transform.rotation = range.transform.rotation;
             particle.Play();
 
+            StartCoroutine(ShakeCamera(0.3f));
+
             range.SetActive(false);
             state = State.Normal;
         }
+    }
+
+    IEnumerator ShakeCamera(float time)
+    {
+        vCam.m_AmplitudeGain = 3;
+        yield return new WaitForSeconds(time);
+        vCam.m_AmplitudeGain = 0;
     }
 
     private void OnDrawGizmos()
