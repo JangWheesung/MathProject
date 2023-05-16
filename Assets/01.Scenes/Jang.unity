@@ -981,6 +981,7 @@ GameObject:
   - component: {fileID: 721989626}
   - component: {fileID: 721989625}
   - component: {fileID: 721989627}
+  - component: {fileID: 721989628}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -1081,6 +1082,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &721989628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721989624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1030cee23b12e42922b093bafc688d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 4
 --- !u!1 &765592226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,9 +1106,9 @@ GameObject:
   - component: {fileID: 765592229}
   - component: {fileID: 765592228}
   - component: {fileID: 765592227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (1)
-  m_TagString: Ground
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
