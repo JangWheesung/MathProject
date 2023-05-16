@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        gaugeBar = FindObjectOfType<Slider>();
+        gaugeBar = GameObject.Find("Gauge").GetComponent<Slider>();
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         Destroy(gameObject, 1);
