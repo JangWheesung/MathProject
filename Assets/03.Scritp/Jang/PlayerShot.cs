@@ -17,6 +17,7 @@ public class PlayerShot : MonoBehaviour
 
     [SerializeField] private GameObject range;
     [SerializeField] private float ultRadius;
+    [SerializeField] private float angle;
 
     private Slider gaugeBar;
 
@@ -60,9 +61,9 @@ public class PlayerShot : MonoBehaviour
         range.SetActive(true);
 
         if(Input.GetKey(KeyCode.K))
-            range.transform.RotateAround(range.transform.GetChild(0).position, Vector2.left, 1);
+            range.transform.RotateAround(range.transform.GetChild(0).position, Vector3.forward, 0.5f);
         if (Input.GetKey(KeyCode.L))
-            range.transform.RotateAround(range.transform.GetChild(0).position, Vector2.left, -1);
+            range.transform.RotateAround(range.transform.GetChild(0).position, Vector3.forward, -0.5f);
 
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -72,12 +73,13 @@ public class PlayerShot : MonoBehaviour
             {
                 Vector3 vec = enmy.gameObject.transform.position - transform.position;
 
-                float degress = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(vec.normalized, range.transform.forward));
+                float degress = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(vec.normalized, range.transform.up));
+                Debug.Log(degress);
 
-                if (degress <= 50)
+                if (degress <= angle / 2)
                 {
                     //범위 내 들어옴
-                    Debug.Log(enmy);
+                    Debug.Log($"enemy : {enmy}");
                 }
             }
 
@@ -90,7 +92,7 @@ public class PlayerShot : MonoBehaviour
     {
         Handles.color = Color.red;
         // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-        //Handles.DrawSolidArc(transform.position, Vector3.forward, transform.up, 100 / 2, 2);
-        //Handles.DrawSolidArc(transform.position, Vector3.forward, transform.up, -100 / 2, 2);
+        Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, angle / 2, ultRadius);
+        Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, -angle / 2, ultRadius);
     }
 }

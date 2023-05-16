@@ -24,7 +24,6 @@ public class PlayerJump : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGround.Ground())
         {
-            Debug.Log(333);
             rb.velocity += Vector2.up * jumpSpeed;
         }
     }
