@@ -12,7 +12,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamage
     protected Rigidbody2D Rb;
     protected SpriteRenderer sp;
 
-    protected virtual void Awake()
+    public virtual void Awake()
     {
         sp = gameObject.GetComponent<SpriteRenderer>();
         Reset();
