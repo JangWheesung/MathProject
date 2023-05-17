@@ -30,7 +30,6 @@ public class EnemyMovement : MonoBehaviour
 
     void FSM()
     {
-        Debug.Log(PlayerRader());
         if (PlayerRader()) 
             state = State.Tracking;
 
@@ -63,6 +62,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawSphere(transform.position, radius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

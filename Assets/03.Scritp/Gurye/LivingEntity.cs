@@ -7,7 +7,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamage
 {
     public float Health;
     public bool IsDead { get; protected set; }
-    public float CurrentHealth;
+    public float CurrentHealth { get; protected set; }
     public UnityEvent OnDeath;
     protected Rigidbody2D rb;
     protected SpriteRenderer sp;
@@ -25,13 +25,6 @@ public abstract class LivingEntity : MonoBehaviour, IDamage
         CurrentHealth = Health;
     }
 
-    protected virtual void Update()
-    {
-        Debug.Log("up");
-        if (CurrentHealth <= Health && !IsDead)
-            OnDie();
-    }
-
     public virtual void OnDie()
     {
         IsDead = true;
@@ -45,17 +38,21 @@ public abstract class LivingEntity : MonoBehaviour, IDamage
 
         Vector2 vec;//넉백
         vec = transform.position.x > hitPoint.x ? Vector2.right : Vector2.left;
-        rb.AddForce(vec * knckbackValue);
+        rb.velocity += vec * knckbackValue;
 
         CurrentHealth -= damage;//피 깍임
 
-        StartCoroutine(DamageColor(0.5f));
+        StartCoroutine(DamageColor(0.1f));
     }
 
     IEnumerator DamageColor(float time)
     {
-        sp.color = Color.red;
-        yield return new WaitForSeconds(time);
-        sp.color = Color.white;
+        for (int i = 0; i < 3; i++)
+        {
+            sp.color = Color.red;
+            yield return new WaitForSeconds(time);
+            sp.color = Color.white;
+            yield return new WaitForSeconds(time);
+        }
     }
 }

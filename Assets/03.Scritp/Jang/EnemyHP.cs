@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class EnemyHP : LivingEntity
 {
-    protected override void Update()
+    private EnemyMovement enemyMovement;
+
+    protected override void Awake()
     {
-        base.Update();
+        base.Awake();
+        enemyMovement = gameObject.GetComponent<EnemyMovement>();
     }
 
-    public void EnemyDie()
+    void Update()
     {
+        if (CurrentHealth <= 0 && !IsDead)
+            OnDie();
+    }
+
+    public override void OnDie()
+    {
+        IsDead = true;
         Destroy(gameObject);
     }
 
@@ -18,7 +28,7 @@ public class EnemyHP : LivingEntity
     {
         if (collision.transform.tag == "Bullet")
         {
-            OnDamage(1, collision.transform.position, 1);
+            OnDamage(1, collision.transform.position);
         }
     }
 }
