@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyHP : LivingEntity
 {
+    [SerializeField] private GameObject particle;
+
     private EnemyMovement enemyMovement;
 
     protected override void Awake()
@@ -21,6 +23,10 @@ public class EnemyHP : LivingEntity
     public override void OnDie()
     {
         IsDead = true;
+        enemyMovement.enabled = false;
+
+        GameObject part = Instantiate(particle, transform.position, Quaternion.identity);
+        Destroy(part, 1);
         Destroy(gameObject);
     }
 
