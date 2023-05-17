@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,6 +59,15 @@ public class EnemyMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         state = State.Tracking;
+
+        if (collision.transform.tag == "Player")
+        {
+            try
+            {
+                collision.transform.GetComponent<PlayerHP>().OnDamage(1, transform.position, 20);
+            }
+            catch (Exception exp) { }
+        }
     }
 
     private void OnDrawGizmos()

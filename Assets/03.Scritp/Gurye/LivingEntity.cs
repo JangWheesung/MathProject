@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,14 +32,15 @@ public abstract class LivingEntity : MonoBehaviour, IDamage
         OnDeath?.Invoke();
     }
 
-    public void OnDamage(float damage, Vector2 hitPoint, float knckbackValue = 3)
+    public void OnDamage(float damage, Vector2 hitPoint, float knckbackValue = 5)
     {
         if (IsDead)//죽음 감지
             return;
 
         Vector2 vec;//넉백
         vec = transform.position.x > hitPoint.x ? Vector2.right : Vector2.left;
-        rb.velocity += vec * knckbackValue;
+
+        rb.AddForceAtPosition(vec * knckbackValue * 100, gameObject.transform.position);
 
         CurrentHealth -= damage;//피 깍임
 

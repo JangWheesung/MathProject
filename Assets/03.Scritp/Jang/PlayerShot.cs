@@ -117,7 +117,7 @@ public class PlayerShot : MonoBehaviour
             {
                 //범위 내 들어옴
                 Debug.Log($"enemy : {enmy}");
-                enmy.GetComponent<EnemyHP>().OnDamage(5, transform.position, 5);
+                enmy.GetComponent<EnemyHP>().OnDamage(5, transform.position, 9);
             }
         }
 

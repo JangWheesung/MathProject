@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,13 @@ public class PlayerPos : MonoBehaviour
 {
     [SerializeField] private GameObject player;
 
-    void Update()
+
+    private void FixedUpdate()
     {
-        transform.position = player.transform.position;
+        try
+        {
+            transform.position = player.transform.position;
+        }
+        catch (Exception exp) { }
     }
 }
