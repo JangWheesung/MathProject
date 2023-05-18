@@ -116,8 +116,7 @@ public class PlayerShot : MonoBehaviour
             if (degress <= angle / 2)
             {
                 //범위 내 들어옴
-                Debug.Log($"enemy : {enmy}");
-                enmy.GetComponent<EnemyHP>().OnDamage(5, transform.position, 9);
+                enmy.GetComponent<LivingEntity>().OnDamage(5, transform.position, 9);
             }
         }
 

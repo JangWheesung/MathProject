@@ -5,9 +5,12 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour
 {
     [SerializeField] float jumpSpeed;
+    [SerializeField] float maxJumpcount;
 
     private Rigidbody2D rb;
     private IsGround isGround;
+
+    public float jumpCount;
 
     private void Awake()
     {
@@ -22,9 +25,14 @@ public class PlayerJump : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGround.Ground())
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount > 0)
         {
+            rb.velocity = Vector2.zero;
             rb.velocity += Vector2.up * jumpSpeed;
+            jumpCount--;
         }
+
+        if (isGround.Ground())
+            jumpCount = maxJumpcount;
     }
 }
