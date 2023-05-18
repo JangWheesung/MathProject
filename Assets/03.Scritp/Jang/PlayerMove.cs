@@ -6,16 +6,19 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] float speed;
 
+    private PlayerAnim playerAnim;
     private Rigidbody2D rb;
 
     private void Awake()
     {
+        playerAnim = gameObject.GetComponent<PlayerAnim>();
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
         Move();
+        AnimSetting();
     }
 
     private void Move()
@@ -28,5 +31,11 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetAxisRaw("Horizontal") <= -1)
             transform.rotation = Quaternion.Euler(0, 180, 0);
+    }
+
+    void AnimSetting()
+    {
+        playerAnim.MoveAnim(Input.GetAxisRaw("Horizontal"));
+        playerAnim.JumpAnim(rb.velocity.y);
     }
 }
