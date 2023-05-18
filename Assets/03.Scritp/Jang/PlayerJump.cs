@@ -27,4 +27,4 @@ public class PlayerJump : MonoBehaviour
             rb.velocity += Vector2.up * jumpSpeed;
         }
     }
-    }
+}

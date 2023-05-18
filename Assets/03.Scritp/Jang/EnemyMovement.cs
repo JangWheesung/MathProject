@@ -46,9 +46,11 @@ public class EnemyMovement : MonoBehaviour
 
     void TrackingEnemy()
     {
-        Vector2 vec = player.transform.position - transform.position;
-
-        rb.velocity = vec * speed;
+        try
+        {
+            Vector2 vec = player.transform.position - transform.position;
+        }
+        catch (Exception exp) { }
     }
 
     bool PlayerRader()
