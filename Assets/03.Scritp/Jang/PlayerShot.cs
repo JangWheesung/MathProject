@@ -27,6 +27,8 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera cam;
     private CinemachineBasicMultiChannelPerlin vCam;
 
+    private AudioSource rangeSource;
+    private AudioSource audioSource;
     private Slider gaugeBar;
     private Color backGround;
     private Color fill;
@@ -37,6 +39,9 @@ public class PlayerShot : MonoBehaviour
 
         backGround = gaugeBar.transform.GetChild(0).GetComponent<Image>().color;
         fill = gaugeBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color;
+
+        rangeSource = range.GetComponent<AudioSource>();
+        audioSource = range.GetComponent <AudioSource>();
 
         vCam = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
@@ -111,7 +116,6 @@ public class PlayerShot : MonoBehaviour
             Vector3 vec = enmy.gameObject.transform.position - transform.position;
 
             float degress = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(vec.normalized, range.transform.up));
-            Debug.Log(degress);
 
             if (degress <= angle / 2)
             {
@@ -122,6 +126,7 @@ public class PlayerShot : MonoBehaviour
 
         particle.transform.rotation = range.transform.rotation;
         particle.Play();
+        rangeSource.Play();
 
         StartCoroutine(ShakeCamera(0.3f));
 
