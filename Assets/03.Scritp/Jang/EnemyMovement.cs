@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private float speed;
 
+    SpriteRenderer sp;
     Rigidbody2D rb;
     GameObject player;
 
@@ -19,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
+        sp = gameObject.GetComponent<SpriteRenderer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
     }
@@ -49,6 +51,9 @@ public class EnemyMovement : MonoBehaviour
         try
         {
             Vector2 vec = player.transform.position - transform.position;
+            rb.velocity = vec * speed;
+
+            sp.flipX = vec.x > 0 ? true : false;
         }
         catch (Exception exp) { }
     }
