@@ -117,6 +117,7 @@ public class PlayerShot : MonoBehaviour
             {
                 //범위 내 들어옴
                 Debug.Log($"enemy : {enmy}");
+                enmy.GetComponent<EnemyHP>().OnDamage(5, transform.position, 9);
             }
         }
 
@@ -142,5 +143,6 @@ public class PlayerShot : MonoBehaviour
         // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
         Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, angle / 2, ultRadius);
         Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, -angle / 2, ultRadius);
+        Gizmos.DrawWireSphere(transform.position, ultRadius);
     }
 }

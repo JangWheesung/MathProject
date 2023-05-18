@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,9 @@ public class EnemyMovement : MonoBehaviour
     State state = State.Idle;
 
     [SerializeField] private float radius;
+    [SerializeField] private float speed;
 
+    Rigidbody2D rb;
     GameObject player;
 
     float shake = -180;
@@ -16,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
     }
 
@@ -43,6 +47,8 @@ public class EnemyMovement : MonoBehaviour
     void TrackingEnemy()
     {
         Vector2 vec = player.transform.position - transform.position;
+
+        rb.velocity = vec * speed;
     }
 
     bool PlayerRader()
@@ -53,10 +59,20 @@ public class EnemyMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         state = State.Tracking;
+
+        if (collision.transform.tag == "Player")
+        {
+            try
+            {
+                collision.transform.GetComponent<PlayerHP>().OnDamage(1, transform.position, 20);
+            }
+            catch (Exception exp) { }
+        }
     }
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawSphere(transform.position, radius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

@@ -13,9 +13,15 @@ public class PlayerMove : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        rb.velocity = new Vector3(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y, Input.GetAxisRaw("Vertical") * speed);
+        Move();
+    }
+
+    private void Move()
+    {
+        Vector2 newVelocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y);
+        rb.velocity = newVelocity;
 
         if (Input.GetAxisRaw("Horizontal") >= 1)
             transform.rotation = Quaternion.Euler(0, 0, 0);
