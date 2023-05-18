@@ -17,4 +17,15 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene("");
     }
+
+    public void GameClear(float time)
+    {
+        StartCoroutine(GameClearing(time));
+    }
+
+    private IEnumerator GameClearing(float time)
+    {
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene("");
+    }
 }

@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHP : LivingEntity
+public class DronHP : LivingEntity
 {
     [SerializeField] private GameObject particle;
 
     private EnemyMovement enemyMovement;
+    private Shield shield;
 
     protected override void Awake()
     {
         base.Awake();
         enemyMovement = gameObject.GetComponent<EnemyMovement>();
+        shield = transform.GetChild(0).GetComponent<Shield>();
     }
 
     void Update()
@@ -22,8 +24,6 @@ public class EnemyHP : LivingEntity
 
     public override void OnDie()
     {
-        base.OnDie();
-
         IsDead = true;
         enemyMovement.enabled = false;
 
@@ -34,9 +34,10 @@ public class EnemyHP : LivingEntity
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Bullet")
+        if (collision.transform.tag == "Bullet" && !shield.isShield)
         {
             OnDamage(1, collision.transform.position);
         }
+        shield.isShield = false;
     }
 }
