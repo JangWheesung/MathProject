@@ -140,6 +140,8 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  prfHpBar: {fileID: 6164692096108584157, guid: 3dc06c4417498fd4092696824a9dc288, type: 3}
+  canvers: {fileID: 0}
   particle: {fileID: 4883142688957333592, guid: 97724c1032140f74aa3ae03831de7798, type: 3}
 --- !u!61 &835420627
 BoxCollider2D:
