@@ -2,6 +2,7 @@ using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public abstract class LivingEntity : MonoBehaviour, IDamage
@@ -12,6 +13,10 @@ public abstract class LivingEntity : MonoBehaviour, IDamage
     public UnityEvent OnDeath;
     protected Rigidbody2D rb;
     protected SpriteRenderer sp;
+
+    protected GameObject canvers;
+    protected RectTransform hpBar;
+    public Slider slider;
 
     protected virtual void Awake()
     {

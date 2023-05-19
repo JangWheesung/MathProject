@@ -9,10 +9,6 @@ public class EnemyHP : LivingEntity
     [SerializeField] private GameObject prfHpBar;
     [SerializeField] private GameObject particle;
 
-    private GameObject canvers;
-    private RectTransform hpBar;
-    private Slider slider;
-
     private EnemyMovement enemyMovement;
     private AudioSource audioSource;
     const float height = 1.5f;

@@ -120,7 +120,9 @@ public class PlayerShot : MonoBehaviour
             if (degress <= angle / 2)
             {
                 //범위 내 들어옴
-                enmy.GetComponent<LivingEntity>().OnDamage(5, transform.position, 9);
+                float dmg = 5;//데미지
+                enmy.GetComponent<LivingEntity>().OnDamage(dmg, transform.position, 9);
+                enmy.GetComponent<LivingEntity>().slider.value -= dmg;
             }
         }
 
