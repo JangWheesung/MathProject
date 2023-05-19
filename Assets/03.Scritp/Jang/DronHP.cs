@@ -7,12 +7,14 @@ public class DronHP : LivingEntity
     [SerializeField] private GameObject particle;
 
     private EnemyMovement enemyMovement;
+    private AudioSource audioSource;
     private Shield shield;
 
     protected override void Awake()
     {
         base.Awake();
         enemyMovement = gameObject.GetComponent<EnemyMovement>();
+        audioSource = gameObject.GetComponent<AudioSource>();
         shield = transform.GetChild(0).GetComponent<Shield>();
     }
 
@@ -36,6 +38,7 @@ public class DronHP : LivingEntity
     {
         if (collision.transform.tag == "Bullet" && !shield.isShield)
         {
+            audioSource.Play();
             OnDamage(1, collision.transform.position);
         }
         shield.isShield = false;

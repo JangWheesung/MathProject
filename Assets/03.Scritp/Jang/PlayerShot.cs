@@ -27,7 +27,7 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera cam;
     private CinemachineBasicMultiChannelPerlin vCam;
 
-    private AudioSource rangeSource;
+    private AudioSource shotSource;
     private AudioSource audioSource;
     private Slider gaugeBar;
     private Color backGround;
@@ -40,8 +40,8 @@ public class PlayerShot : MonoBehaviour
         backGround = gaugeBar.transform.GetChild(0).GetComponent<Image>().color;
         fill = gaugeBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color;
 
-        rangeSource = range.GetComponent<AudioSource>();
-        audioSource = range.GetComponent <AudioSource>();
+        shotSource = point.GetComponent<AudioSource>();
+        audioSource = point.GetComponent <AudioSource>();
 
         vCam = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
@@ -126,7 +126,7 @@ public class PlayerShot : MonoBehaviour
 
         particle.transform.rotation = range.transform.rotation;
         particle.Play();
-        rangeSource.Play();
+        shotSource.Play();
 
         StartCoroutine(ShakeCamera(0.3f));
 

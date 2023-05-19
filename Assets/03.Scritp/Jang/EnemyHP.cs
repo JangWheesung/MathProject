@@ -7,11 +7,13 @@ public class EnemyHP : LivingEntity
     [SerializeField] private GameObject particle;
 
     private EnemyMovement enemyMovement;
+    private AudioSource audioSource;
 
     protected override void Awake()
     {
         base.Awake();
         enemyMovement = gameObject.GetComponent<EnemyMovement>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -36,6 +38,7 @@ public class EnemyHP : LivingEntity
     {
         if (collision.transform.tag == "Bullet")
         {
+            audioSource.Play();
             OnDamage(1, collision.transform.position);
         }
     }
