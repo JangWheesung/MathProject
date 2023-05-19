@@ -13,17 +13,6 @@ public class EndManager : MonoBehaviour
     private void Awake()
     {
         _gameOverTXT = _gameOverTXT.GetComponent<TextMeshProUGUI>();
-        _gameOverTXT.DOFade(0f, 1).SetLoops(-1, _loop);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void DoBlank()
-    {
-
+        _gameOverTXT.DOFade(0f, 0.8f).SetLoops(-1, _loop);
     }
 }
