@@ -1,16 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHP : LivingEntity
+public class DronHP : LivingEntity
 {
     [SerializeField] private GameObject prfHpBar;
     [SerializeField] private GameObject particle;
 
     private EnemyMovement enemyMovement;
     private AudioSource audioSource;
+    private Shield shield;
     const float height = 1.5f;
 
     Camera mainCam;
@@ -26,6 +26,7 @@ public class EnemyHP : LivingEntity
 
         enemyMovement = gameObject.GetComponent<EnemyMovement>();
         audioSource = gameObject.GetComponent<AudioSource>();
+        shield = transform.GetChild(0).GetComponent<Shield>();
     }
 
     private void Start()
@@ -50,8 +51,6 @@ public class EnemyHP : LivingEntity
 
     public override void OnDie()
     {
-        base.OnDie();
-
         IsDead = true;
         enemyMovement.enabled = false;
 
@@ -64,11 +63,12 @@ public class EnemyHP : LivingEntity
     private void OnCollisionEnter2D(Collision2D collision)
     {
         const int dmg = 1;
-        if (collision.transform.tag == "Bullet")
+        if (collision.transform.tag == "Bullet" && !shield.isShield)
         {
             audioSource.Play();
             OnDamage(dmg, collision.transform.position);
             slider.value -= dmg;
         }
+        shield.isShield = false;
     }
 }

@@ -27,6 +27,8 @@ public class PlayerShot : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera cam;
     private CinemachineBasicMultiChannelPerlin vCam;
 
+    private AudioSource shotSource;
+    private AudioSource audioSource;
     private Slider gaugeBar;
     private Color backGround;
     private Color fill;
@@ -37,6 +39,9 @@ public class PlayerShot : MonoBehaviour
 
         backGround = gaugeBar.transform.GetChild(0).GetComponent<Image>().color;
         fill = gaugeBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color;
+
+        shotSource = point.GetComponent<AudioSource>();
+        audioSource = point.GetComponent <AudioSource>();
 
         vCam = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
@@ -111,18 +116,19 @@ public class PlayerShot : MonoBehaviour
             Vector3 vec = enmy.gameObject.transform.position - transform.position;
 
             float degress = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(vec.normalized, range.transform.up));
-            Debug.Log(degress);
 
             if (degress <= angle / 2)
             {
                 //범위 내 들어옴
-                Debug.Log($"enemy : {enmy}");
-                enmy.GetComponent<EnemyHP>().OnDamage(5, transform.position, 9);
+                float dmg = 5;//데미지
+                enmy.GetComponent<LivingEntity>().OnDamage(dmg, transform.position, 9);
+                enmy.GetComponent<LivingEntity>().slider.value -= dmg;
             }
         }
 
         particle.transform.rotation = range.transform.rotation;
         particle.Play();
+        shotSource.Play();
 
         StartCoroutine(ShakeCamera(0.3f));
 
@@ -141,8 +147,8 @@ public class PlayerShot : MonoBehaviour
     {
         Handles.color = Color.red;
         // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-        Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, angle / 2, ultRadius);
-        Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, -angle / 2, ultRadius);
+        //Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, angle / 2, ultRadius);
+        //Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, -angle / 2, ultRadius);
         Gizmos.DrawWireSphere(transform.position, ultRadius);
     }
 }

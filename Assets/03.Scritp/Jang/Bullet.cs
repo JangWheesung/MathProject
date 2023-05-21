@@ -29,7 +29,8 @@ public class Bullet : MonoBehaviour
         if (collision.transform.tag == "Enemy")
         {
             gaugeBar.value++;
-            Destroy(gameObject);
         }
+        Debug.Log(collision.transform.name);
+        Destroy(gameObject);
     }
 }
