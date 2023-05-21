@@ -6274,6 +6274,7 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  slider: {fileID: 0}
   HPBar: {fileID: 2116409244}
   particle: {fileID: 4883142688957333592, guid: ab1981ea340d1c941b8cd65ec203a81e, type: 3}
 --- !u!60 &614431123
