@@ -69,9 +69,9 @@ public class PlayerShot : MonoBehaviour
 
     void GaugeFull()
     {
-        if (gaugeBar.value >= gaugeBar.maxValue)
+        if (gaugeBar.value >= gaugeBar.maxValue)//게이지가 다 찾다면
         {
-            float expression = (Mathf.Cos(Time.time * 2 * Mathf.PI) + 1) * 0.5f;
+            float expression = (Mathf.Cos(Time.time * 2 * Mathf.PI) + 1) * 0.5f;//시간이 흐름에 따라 0 ~ 1로 계속 변환한다.
 
             gaugeBar.transform.GetChild(0).GetComponent<Image>().color = new Color(backGround.r, backGround.g, backGround.b, expression);
             gaugeBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(fill.r, fill.g, fill.b, expression);
@@ -111,12 +111,12 @@ public class PlayerShot : MonoBehaviour
     {
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, ultRadius, LayerMask.GetMask("Enemy"));
 
-        foreach (Collider2D enmy in cols)
+        foreach (Collider2D enmy in cols)//플레이어의 감지(원)안에 들면 모든 적들 검사
         {
-            Vector3 vec = enmy.gameObject.transform.position - transform.position;
+            Vector3 vec = enmy.gameObject.transform.position - transform.position;//바라보는 방향
 
             float degress = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(vec.normalized, range.transform.up));
-
+            //바라보는 방향과 부채꼴의 위쪽방향 사이의 각도를 구하고 Acos으로 라디안으로 변한한뒤, 다시 도로 변환 
             if (degress <= angle / 2)
             {
                 //범위 내 들어옴

@@ -30,7 +30,6 @@ public class Bullet : MonoBehaviour
         {
             gaugeBar.value++;
         }
-        Debug.Log(collision.transform.name);
         Destroy(gameObject);
     }
 }
