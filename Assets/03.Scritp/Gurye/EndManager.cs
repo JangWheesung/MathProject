@@ -15,4 +15,9 @@ public class EndManager : MonoBehaviour
         _gameOverTXT = _gameOverTXT.GetComponent<TextMeshProUGUI>();
         _gameOverTXT.DOFade(0f, 0.8f).SetLoops(-1, _loop);
     }
+
+    public void StartScreen(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
 }

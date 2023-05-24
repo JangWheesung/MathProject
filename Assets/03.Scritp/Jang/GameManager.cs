@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator GameOver(float time)
     {
         yield return new WaitForSeconds(time);
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("End");
     }
 
     public void GameClear(float time)
@@ -26,6 +26,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator GameClearing(float time)
     {
         yield return new WaitForSeconds(time);
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("Claer");
     }
 }

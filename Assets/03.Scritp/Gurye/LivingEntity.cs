@@ -9,7 +9,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamage
 {
     public float Health;
     public bool IsDead { get; protected set; }
-    public float CurrentHealth { get; protected set; }
+    public float CurrentHealth; //{ get; protected set; }
     public UnityEvent OnDeath;
     protected Rigidbody2D rb;
     protected SpriteRenderer sp;

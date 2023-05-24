@@ -31,6 +31,7 @@ public class EnemyHP : LivingEntity
     private void Start()
     {
         slider.maxValue = Health;
+        slider.value = Health;
     }
 
     void Update()
