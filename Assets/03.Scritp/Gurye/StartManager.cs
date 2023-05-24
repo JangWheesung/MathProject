@@ -47,7 +47,7 @@ public class StartManager : MonoBehaviour
         _fade.gameObject.SetActive(true);
         _isFade = !_isFade;
         _fade.DOFade(_isFade ? 1 : 0, _duration).SetEase(Ease.OutBounce).OnComplete(() =>
-        ChangeSceen(SceneManager.GetActiveScene().buildIndex));
+        ChangeSceen(1));
     }
 
     public void ButtonInteractable(bool a)
