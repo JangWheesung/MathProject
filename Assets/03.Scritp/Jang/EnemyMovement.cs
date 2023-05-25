@@ -52,24 +52,17 @@ public class EnemyMovement : MonoBehaviour
     {
         try
         {
-            Vector2 forWord = transform.up;//적이 화면을 바라보는 쪽
+            Vector2 forWord = transform.up;//적의 위쪽
             Vector2 vec = player.transform.position - transform.position; // 플레이어를 바라보는 방향
             rb.velocity = vec * speed;
 
             int flip = 0;
-            if(Cross(forWord, vec).z < 0)//z가 0보다 작다면 회전
+            if(Vector3.Cross(forWord, vec).z < 0)
+                // 위쪽 수직과 플레이어를 바라보는 백터 사이의 각도가 0보다 작으면 왼쪽, 크면 오른쪽
                 flip = 1;
             transform.rotation = Quaternion.Euler(0, flip * 180, 0);
         }
         catch (Exception exp) { }
-    }
-
-    Vector3 Cross(Vector3 a, Vector3 b)//백터의 외적을 반환
-    {
-        float crossX = a.y * b.z - a.z * b.y;
-        float crossY = a.z * b.x - a.x * b.z;
-        float crossZ = a.x * b.y - a.y * b.x;
-        return new Vector3(crossX, crossY, crossZ);
     }
 
     bool PlayerRader()

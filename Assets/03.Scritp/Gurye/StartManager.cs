@@ -48,6 +48,7 @@ public class StartManager : MonoBehaviour
         _isFade = !_isFade;
         _fade.DOFade(_isFade ? 1 : 0, _duration).SetEase(Ease.OutBounce).OnComplete(() =>
         ChangeSceen(1));
+        //화면을 누르면 검은화면이 OutBounce그래프처럼 화면을 뒤덮힌다.
     }
 
     public void ButtonInteractable(bool a)
