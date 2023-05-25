@@ -71,7 +71,11 @@ public class PlayerShot : MonoBehaviour
     {
         if (gaugeBar.value >= gaugeBar.maxValue)//게이지가 다 찾다면
         {
-            float expression = (Mathf.Cos(Time.time * 2 * Mathf.PI) + 1) * 0.5f;//시간이 흐름에 따라 0 ~ 1로 계속 변환한다.
+            float expression = (Mathf.Cos(Time.time * 2 * Mathf.PI) + 1) * 0.5f;
+            //시간이 흐름에 따라 코사인의 값이 변경된다.
+            //그래프에 +1를 대해줘서 코사인의 간격을 -1 ~ 1에서 0 ~ 2로 바꿔준다.
+            //마지막으로 그래프에 1/2를 곱해줘서 0 ~ 2범위를 0 ~ 1로 바꿔준다.
+            //expression이 0 ~ 1로 계속 변환한다.
 
             gaugeBar.transform.GetChild(0).GetComponent<Image>().color = new Color(backGround.r, backGround.g, backGround.b, expression);
             gaugeBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(fill.r, fill.g, fill.b, expression);
