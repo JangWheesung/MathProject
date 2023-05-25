@@ -101,9 +101,9 @@ public class PlayerShot : MonoBehaviour
         range.SetActive(true);
 
         if(Input.GetKey(KeyCode.K))
-            range.transform.RotateAround(range.transform.GetChild(0).position, Vector3.forward, 0.5f);
+            range.transform.RotateAround(range.transform.GetChild(0).position, Vector3.forward, 1.5f);
         if (Input.GetKey(KeyCode.L))
-            range.transform.RotateAround(range.transform.GetChild(0).position, Vector3.forward, -0.5f);
+            range.transform.RotateAround(range.transform.GetChild(0).position, Vector3.forward, -1.5f);
 
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -147,12 +147,12 @@ public class PlayerShot : MonoBehaviour
         vCam.m_AmplitudeGain = 0;
     }
 
-    private void OnDrawGizmos()
-    {
-        Handles.color = Color.red;
-        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-        //Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, angle / 2, ultRadius);
-        //Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, -angle / 2, ultRadius);
-        Gizmos.DrawWireSphere(transform.position, ultRadius);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Handles.color = Color.red;
+    //    DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
+    //    Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, angle / 2, ultRadius);
+    //    Handles.DrawSolidArc(transform.position, Vector3.forward, range.transform.up, -angle / 2, ultRadius);
+    //    Gizmos.DrawWireSphere(transform.position, ultRadius);
+    //}
 }

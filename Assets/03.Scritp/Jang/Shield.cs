@@ -8,7 +8,7 @@ public class Shield : MonoBehaviour
 
     void Update()
     {
-        transform.RotateAround(transform.GetChild(0).position, Vector3.forward, 0.5f);
+        transform.RotateAround(transform.GetChild(0).position, Vector3.forward, 1.5f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

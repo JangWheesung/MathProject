@@ -1,5 +1,4 @@
-using Cinemachine;
-using Cinemachine.Editor;
+using Cinemachine;  
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +10,6 @@ public class PlayerHP : LivingEntity
     [SerializeField] private Slider HPBar;
     [SerializeField] private GameObject particle;
     CinemachineVirtualCamera vcam;
-    SpriteRenderer sp;
 
     protected override void Awake()
     {
