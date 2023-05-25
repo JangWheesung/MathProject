@@ -50,6 +50,7 @@ public class EnemyMovement : MonoBehaviour
 
     void TrackingEnemy()
     {
+        Debug.Log("자자이리로와");
         try
         {
             Vector2 forWord = transform.up;//적의 위쪽
@@ -72,8 +73,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        state = State.Tracking;
-
         if (collision.transform.tag == "Player")
         {
             try
@@ -82,6 +81,8 @@ public class EnemyMovement : MonoBehaviour
             }
             catch (Exception exp) { }
         }
+        else if(collision.transform.tag == "Bullet")
+            state = State.Tracking;
     }
 
     private void OnDrawGizmos()
